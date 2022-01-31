@@ -4,7 +4,14 @@ import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import cors from 'cors'
 
+import dotenv from 'dotenv'
+import database from './config/database'
+
 import middlewares from './middlewares'
+import routes from './routes'
+
+dotenv.config()
+database.connect()
 
 const app = express()
 
@@ -14,11 +21,10 @@ app.use(helmet())
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.status(404)
-  res.send({
-    message: 'Hello World!'
-  })
+  res.status(200)
 })
+
+app.use('/api', routes)
 
 app.use(middlewares.notFound)
 app.use(middlewares.errorHandler)
