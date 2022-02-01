@@ -21,7 +21,9 @@ app.use(helmet())
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.status(200)
+  res.status(200).json({
+    message: 'Welcome to the API'
+  })
 })
 
 app.use('/api', routes)

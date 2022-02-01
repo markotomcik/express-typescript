@@ -13,9 +13,11 @@ function signToken (user: typeof User) {
 export default {
   async register (req: Request, res: Response) {
     try {
-      const user = new User(req.body)
-      res.status(201).send({
-        userId: user.id
+      const user = await User.create(req.body)
+      const savedUser = await user.save()
+
+      res.status(201).json({
+        userId: savedUser.id
       })
     } catch (error) {
       res.status(400).send({

@@ -14,7 +14,7 @@ describe('POST /api/v1/register', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(function (res: any) {
-        if (typeof res.body.userId === 'number') {
+        if (res.body.userId) {
           return true
         }
       })
