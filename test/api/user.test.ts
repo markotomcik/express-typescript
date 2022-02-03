@@ -3,7 +3,7 @@ import { describe, it } from 'mocha'
 
 import app from '../../src/app'
 
-let user: any
+let user: {[k: string]: any} = {}
 
 user.email = `${Math.random()}@test.com`
 user.password = 'test1234'
@@ -39,7 +39,7 @@ describe('POST /api/v1/login', () => {
       .expect('Content-Type', /json/)
       .expect(function (res: any) {
         if (typeof res.body.user === 'object' && typeof res.body.token === 'string') {
-          user.id = res.body.user.id
+          user.id = res.body.user._id
           user.token = res.body.token
           return true
         }
