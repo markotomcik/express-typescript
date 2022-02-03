@@ -3,7 +3,7 @@ import { describe, it } from 'mocha'
 
 import app from '../../src/app'
 
-let user: {[k: string]: any} = {}
+const user: {[k: string]: any} = {}
 
 user.email = `${Math.random()}@test.com`
 user.password = 'test1234'
