@@ -54,5 +54,35 @@ export default {
         error: 'An error has occured trying to login'
       })
     }
+  },
+  async changePassword (req: Request, res: Response) {
+    try {
+      const { userId, oldPassword, newPassword } = req.body
+      const user = await User.findById(userId)
+
+      if (!user) {
+        return res.status(403).send({
+          error: 'The login information was incorrect'
+        })
+      }
+
+      const isPasswordValid = await user.comparePassword(oldPassword)
+      if (!isPasswordValid) {
+        return res.status(403).send({
+          error: 'The login information was incorrect'
+        })
+      }
+
+      user.password = newPassword
+      await user.save()
+
+      res.send({
+        message: 'Password changed successfully'
+      })
+    } catch (error) {
+      res.status(500).send({
+        error: 'An error has occured trying to change password'
+      })
+    }
   }
 }

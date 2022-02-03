@@ -3,6 +3,7 @@ import express from 'express'
 import AuthenticationController from '../controllers/AuthenticationController'
 
 import AuthenticationControllerPolicy from '../policies/AuthenticationControllerPolicy'
+import isAuthenticated from '../policies/isAuthenticated'
 
 const router = express.Router()
 
@@ -19,5 +20,9 @@ router.post('/register',
 
 router.post('/login',
   AuthenticationController.login)
+
+router.post('/changePassword',
+  isAuthenticated,
+  AuthenticationController.changePassword)
 
 export default router

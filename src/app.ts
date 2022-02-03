@@ -10,6 +10,8 @@ import database from './config/database'
 import middlewares from './middlewares'
 import routes from './routes'
 
+import './passport'
+
 dotenv.config()
 database.connect()
 
