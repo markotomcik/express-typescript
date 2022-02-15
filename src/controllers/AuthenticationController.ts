@@ -57,8 +57,8 @@ export default {
   },
   async changePassword (req: Request, res: Response) {
     try {
-      const { userId, oldPassword, newPassword } = req.body
-      const user = await User.findById(userId)
+      const { oldPassword, newPassword } = req.body
+      const user = await User.findById(req.user)
 
       if (!user) {
         return res.status(403).send({
